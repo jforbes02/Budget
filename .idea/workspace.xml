@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b6d99fe-9cfc-4011-a182-57caecff597c" name="Changes" comment="Python Code">
-      <change beforePath="$PROJECT_DIR$/.idea/Budget.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Budget.iml" afterDir="false" />
+    <list default="true" id="9b6d99fe-9cfc-4011-a182-57caecff597c" name="Changes" comment="Working backend(still have to change so that it doesnt constantly repeat the days until end of month)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.venv/expense_tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/expense_tracker.py" afterDir="false" />
     </list>
@@ -45,20 +44,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.expense_tracker.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.expense_tracker.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="expense_tracker" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Budget" />
@@ -114,7 +113,7 @@
       <workItem from="1734473702608" duration="1334000" />
       <workItem from="1734482657962" duration="300000" />
       <workItem from="1734723920004" duration="304000" />
-      <workItem from="1734915530561" duration="1390000" />
+      <workItem from="1734915530561" duration="5009000" />
     </task>
     <task id="LOCAL-00001" summary="Python Code">
       <option name="closed" value="true" />
@@ -132,7 +131,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734491788779</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Working backend(still have to change so that it doesnt constantly repeat the days until end of month)">
+      <option name="closed" value="true" />
+      <created>1734920087929</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734920087929</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,9 +159,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Python Code" />
     <MESSAGE value="summarize code not done yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="summarize code not done yet" />
+    <MESSAGE value="Working backend(still have to change so that it doesnt constantly repeat the days until end of month)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working backend(still have to change so that it doesnt constantly repeat the days until end of month)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Budget$expense_tracker.coverage" NAME="expense_tracker Coverage Results" MODIFIED="1734920008075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.venv" />
+    <SUITE FILE_PATH="coverage/Budget$expense_tracker.coverage" NAME="expense_tracker Coverage Results" MODIFIED="1735069754208" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.venv" />
   </component>
 </project>
