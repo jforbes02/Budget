@@ -1,59 +1,76 @@
-import customtkinter as ctk
 from BudgetTracker import Expense
 from datetime import datetime
 import calendar
-
-
-class BudgetTrackerApp(ctk.CTk):
-    def __init__(self):
-        super().__init__()
-
-        self.title("Ultimate Budget Tracker!")
-        self.geometry("600x600")
-
-        self.budget = 2000.0
-        self.expense_file_path = "expenses.csv"
-
-        self.create_widgets()
-    def create_widgets(self):
-    #header
-        self.head_label = ctk.CTkLabel(self, text="Ultimate Budget Tracker", font=("Arial", 24))
-        self.head_label.pack(pady=10)
-    #Expense Name
-        self.name_label = ctk.CTkLabel(self, text="Expense Name:")
-        self.name_label.pack(pady=5)
-        self.name_entry = ctk.CTkEntry(self, width=300)
-        self.name_entry.pack(pady=5)
-    #Expense Amount
-        self.amount_label = ctk.CTkLabel(self, text="$Amount$:")
-        self.amount_label.pack(pady=5)
-        self.amount_entry = ctk.CTkEntry(self, width=300)
-        self.amount_entry.pack(pady=5)
-    #Categories
-        self.category_label = ctk.CTkLabel(self, text="Select Category:")
-        self.category_label.pack(pady=5)
-        self.category_var = ctk.StringVar(value="Food")
-        self.categories = ["Food", "Home", "Work", "Fun", "Other"]
-        self.category_menu = ctk.CTkOptionMenu(self, variable=self.category_var, values=self.categories)
-        self.category_menu.pack(pady=5)
-
-    #Submit
-        self.add_button = ctk.CTkButton(self, text="Add Expense", command=self.add_expense)
-        self.add_button.pack(pady=10)
-    #Summary
-        self.summary_button = ctk.CTkButton(self, text="Show Summary", command=self.summarize_expense)
-        self.summary_button.pack(pady=10)
-
-        self.summary_textbox = ctk.CTkTextbox(self, width=500, height=200)
-        self.summary_textbox.pack(pady=20)
+import time
 
 def main():
     budget = 2000.0
-    expense = get_user_expense()
     expense_file_path = "expenses.csv"
-    save_expense_to_file(expense, expense_file_path)
-    summarize_expense(expense_file_path, budget)
 
+    while True:
+        print("\nBudget Tracker Menu!")
+        print("1. Add expense")
+        print("2. View Summary")
+        print("3. Adjust budget")
+        print("4. Delete Expenses")
+        print("5. Exit")
+
+        choice = input("Select an option: ").strip()
+        if choice == "1":
+            expense = get_user_expense()
+            save_expense_to_file(expense,expense_file_path)
+        elif choice == "2":
+            summarize_expense(expense_file_path, budget)
+        elif choice == "3":
+            budget = float(input("What is your new budget?"))
+        elif choice == "4":
+            delete_expenses(expense_file_path)
+        elif choice == "5":
+            print("Thank You!")
+            break
+        else:
+            print("invalid option. 1-5 please")
+
+    budget = first_of_month(expense_file_path,budget)
+    #expense = get_user_expense()
+    #save_expense_to_file(expense, expense_file_path)
+    #summarize_expense(expense_file_path, budget)
+    #weekly_budget_check(budget)
+
+# Budget Work
+def first_of_month(expense_file_path, budget):
+    today = datetime.today()
+    if today.day == 1:
+        print("Resetting budget")
+        budget = reset_budget(budget)
+
+        with open(expense_file_path, "w") as f:
+            f.write("")
+    return budget
+
+def weekly_budget_check(budget, target_day = calendar.FRIDAY):
+    #target_day = calendar.FRIDAY
+    today = datetime.today().weekday()
+    if today == target_day:
+        now = datetime.now()
+        if now.weekday() == target_day:
+            get_budget_change(budget)
+        return budget
+
+
+def get_budget_change(budget):
+    increase_check = input("If your budget increased type 'y' if not 'n'")
+    if increase_check == "y":
+        budget_increase = float(input("How much extra money do you have a month now?"))
+        budget = budget + budget_increase
+    elif increase_check == "n":
+        decrease_check = input("If your budget decreased type 'y' if not 'n'")
+        if decrease_check == "y":
+            budget_decrease = float(input("How much less money do you have a month now?"))
+            budget = budget - budget_decrease
+
+
+#Expense Work
 def get_user_expense():
     print(f"Getting User Expense")
     e_name = input("Enter expense name:")
@@ -129,5 +146,42 @@ def summarize_expense(expense_file_path, budget):
     daily_budget = remaining_budget/remaining_days
     print(f"Recommended Budget Per Day!: $ {daily_budget:.2f}")
 
+def view_expenses(expense_file_path):
+    try:
+        with open(expense_file_path, "r") as f:
+            lines = f.readlines()
+            if not lines:
+                print("No expenses")
+                return[]
+
+            print("\nExpenses:")
+            for index, line in enumerate(lines, start=1):
+                print(f"{index}: {line.strip()}") #displays line#:
+            return lines
+    except FileNotFoundError:
+        print("File not found")
+        return[]
+
+def delete_expenses(expense_file_path):
+    lines = view_expenses(expense_file_path)
+    if not lines:
+        return
+
+    while True:
+        try:
+            line_delete = int(input("\nEnter the line # of the expense you want to delete. 0 to cancel"))
+            if line_delete == 0:
+                return
+            if 1 <= line_delete <= len(lines):
+                break
+            else:
+                print("Invalid line #. Try again")
+        except ValueError:
+            print("Invalid input. Enter valid line #")
+
+    del lines[line_delete - 1]
+    with open(expense_file_path, "w") as f:
+        f.writelines(lines)
+    print(f"Expense {line_delete} deleted")
 if __name__ == "__main__":
     main()
